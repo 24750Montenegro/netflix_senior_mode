@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix — Serie</title>
+  <link rel="shortcut icon" href="../images/ModeloPages/icons/letter-n 1.svg" type="image/x-icon">
+  <link rel="stylesheet" href="serieModeloPages/styleModeloSerie.css">
+</head>
+
+<body id="detalle-body">
+
+  <div id="contenido-principal"></div>
+
+  <script>
+    window.BASE_PATH = '../';
+  </script>
+  <script src="../js/csvParser.js"></script>
+  <script src="../js/components.js"></script>
+  <script>
+    (async () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+
+      if (!id) {
+        document.getElementById('contenido-principal').innerHTML =
+          '<p style="color:white;padding:2rem">No se especificó ninguna serie.</p>';
+        return;
+      }
+
+      try {
+        const [series, todasResenas] = await Promise.all([
+          loadCSV('../data/series.csv'),
+          loadCSV('../data/resenas.csv'),
+        ]);
+
+        const serie = series.find(s => s.id === id);
+        if (!serie) {
+          document.getElementById('contenido-principal').innerHTML =
+            '<p style="color:white;padding:2rem">Serie no encontrada.</p>';
+          return;
+        }
+
+        document.title = `Netflix — ${serie.titulo}`;
+        const resenas = filtrarResenas(todasResenas, id);
+        document.getElementById('contenido-principal').innerHTML =
+          detalleContenidoHTML(serie, resenas, 'serie');
+
+      } catch (err) {
+        console.error('Error cargando datos:', err);
+        document.getElementById('contenido-principal').innerHTML =
+          '<p style="color:white;padding:2rem">Error al cargar la información.</p>';
+      }
+    })();
+  </script>
+
+</body>
+</html>

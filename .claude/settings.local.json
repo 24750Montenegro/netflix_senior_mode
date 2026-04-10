@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -h 'img-fundo-serie\\\\|img-fundo' c:/Users/franc/OneDrive/Imágenes/Netflix/Design/netflix_senior_mode/Pages/serieModeloPages/*.html)",
+      "Bash(grep -h 'img-fundo-serie\\\\|img-fundo' c:/Users/franc/OneDrive/Imágenes/Netflix/Design/netflix_senior_mode/Pages/filmeModeloPage/*.html)",
+      "Bash(mkdir -p \"c:/Users/franc/OneDrive/Imágenes/Netflix/Design/netflix_senior_mode/data\")",
+      "Bash(mkdir -p \"c:/Users/franc/OneDrive/Imágenes/Netflix/Design/netflix_senior_mode/js\")",
+      "Bash(ls \"c:/Users/franc/OneDrive/Imágenes/Netflix/Design/netflix_senior_mode/Pages/detalle-\"*.html)"
+    ]
+  }
+}
